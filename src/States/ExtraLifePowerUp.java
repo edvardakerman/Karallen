@@ -2,7 +2,7 @@ package States;
 
 /**
  * ExtraLifePowerUp is a subclass to the PowerUp class, this class overrides the
- * method use() which in this case restores on of the players lives.
+ * method use() and spawn().
  */
 
 public class ExtraLifePowerUp extends PowerUp {
@@ -11,11 +11,13 @@ public class ExtraLifePowerUp extends PowerUp {
 		super(x, y, image);
 	}
 
-	@Override
-	public void use(Player player) {
-		// TODO Auto-generated method stub
-		if (this.powerUpPlayerCollision(player)) {
-			player.setLives(player.getLives() + 1);
+	protected void use(Player player) {
+		player.setLives(player.getLives() + 1);
+	}
+	
+	protected void spawn(Player player) {
+		if (player.getLives() < 3 && (player.getScore() - getScoreSinceActive()) / player.getScoreBonus() >= 10 && !getStatus()) {
+			activate();
 		}
 	}
 }

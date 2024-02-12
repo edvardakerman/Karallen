@@ -1,62 +1,62 @@
 package States;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.util.Random;
+
 import Constants.Constants;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 
 /**
- * PowerUp is a abstract class and provides the basic functionality of
- * ImageView, positioning and collisions.
+ * PowerUp is a abstract subclass to the Object class and provides the behavioral functionality for PowerUps.
  */
 
-public abstract class PowerUp {
+public abstract class PowerUp extends Object{
+	private Boolean active = false;
+	private int scoreSinceActive = 0;
+	private Random random = new Random();
 
-	private ImageView powerUpImageView;
-	private double powerUpX;
-	private double powerUpY;
-
-	PowerUp(double x, double y, String image) {
-		this.powerUpX = x;
-		this.powerUpY = y;
-
-		try {
-			Image powerUpImage = new Image(new FileInputStream(image));
-			powerUpImageView = new ImageView(powerUpImage);
-			powerUpImageView.setX(powerUpX);
-			powerUpImageView.setY(powerUpY);
-			powerUpImageView.setFitWidth(Constants.powerUpWidth);
-			powerUpImageView.setFitHeight(Constants.powerUpHeight);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public PowerUp(double x, double y, String image) {
+		super(x, y, image);
 	}
-
-	public ImageView getPowerUpImageView() {
-		return powerUpImageView;
+	
+	protected Boolean getStatus() {
+		return active;
 	}
-
-	public boolean powerUpPlayerCollision(Player player) {
-		boolean hit = false;
-
-		Rectangle shipRect = new Rectangle(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(),
-				Constants.playerWidth, Constants.playerHeight);
-
-		Rectangle powerUpRect = new Rectangle(this.getPowerUpImageView().getX(), this.getPowerUpImageView().getY(),
-				Constants.powerUpWidth, Constants.powerUpHeight);
-
-		if (shipRect.getBoundsInParent().intersects(powerUpRect.getBoundsInParent())) {
-			hit = true;
-			powerUpImageView.setX(-100);
-			powerUpImageView.setY(-100);
-		}
-
-		return hit;
+	
+	protected int getScoreSinceActive() {
+		return scoreSinceActive;
 	}
-
-	public abstract void use(Player player);
+	
+	protected void deactivate() {
+		active = false;
+		this.objectImageView.setY(-100);
+		this.objectImageView.setX(-100);
+	}
+	
+	protected void activate() {
+		active = true;
+		this.objectImageView.setY(random.nextDouble() * (Constants.screenWidth - 40));
+		this.objectImageView.setX(random.nextDouble((Constants.screenHeight - 40) - (Constants.screenHeight / 2))
+				+ Constants.screenHeight / 2);
+	}
+	
+	private void checkCollision(Player player) {
+		if (this.playerObjectCollision(player)) {
+			this.objectImageView.setY(-100);
+			this.objectImageView.setX(-100);
+			use(player);
+			deactivate();
+			scoreSinceActive = player.getScore();
+		}	
+	}
+	
+	public void handle(Player player) {
+		this.spawn(player);
+		this.checkCollision(player);
+	}
+	
+	
+	
+	protected abstract void use(Player player);
+	
+	protected abstract void spawn(Player player);
 
 }

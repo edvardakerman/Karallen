@@ -3,13 +3,17 @@ package States;
 import java.util.Random;
 
 import Constants.Constants;
-import javafx.scene.shape.Rectangle;
+
+/**
+ * Bouncer is a subclass to the Object class and provides more behavioral functionality like movement.
+ */
 
 public class Bouncer extends Object{
 	private Random random = new Random();
 	private int currentDirection = random.nextInt(4);
 	private double destination = random.nextDouble() * (Constants.screenWidth - 40);
 	private double speed = Constants.objectSpeed;
+	int lastScore = 0;
 	
 	public Bouncer(String image) {		
 		super((Constants.screenWidth - Constants.playerWidth) / 2, Constants.screenHeight - 300, image);
@@ -40,24 +44,14 @@ public class Bouncer extends Object{
 	}
 	
 	public void increaseSpeed() {
-		speed += 0.5;
+		speed += 0.25;
 	}
 	
-	public boolean playerObjectCollision(Player player) {
-		boolean hit = false;
-
-		Rectangle playerRect = new Rectangle(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(),
-				Constants.playerWidth, Constants.playerHeight);
-
-		Rectangle bouncerRect = new Rectangle(this.getObjectImageView().getX(), this.getObjectImageView().getY(),
-				Constants.objectWidth, Constants.objectHeight);
-
-		if (playerRect.getBoundsInParent().intersects(bouncerRect.getBoundsInParent())) {
-			hit = true;
-			player.setLives(0);
+	public void increaseBouncerSpeed(Player player) {
+		if ((player.getScore() - lastScore) / player.getScoreBonus() >= 15) {
+			increaseSpeed();
+			lastScore = player.getScore();
 		}
-
-		return hit;
 	}
 
 }

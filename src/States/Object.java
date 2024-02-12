@@ -9,11 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Enemy handles the enemy behavior including its ImageView and variables. This
- * is a superclass to the EnemyShooter class.
+ * Object is a abstract superclass and handles the object behavior including its ImageView, collisions and variables. This
+ * is a superclass to the Drink, Bouncer and PowerUp class.
  */
 
-public class Object {
+public abstract class Object {
 
 	protected ImageView objectImageView;
 	protected double X;
@@ -48,31 +48,17 @@ public class Object {
 		return objectImageView;
 	}
 
-	public void move() {
-		Y += Constants.objectSpeed;
-		objectImageView.setY(Y);
-	}
-
-	public boolean slipsByPlayer() {
-		if (this.Y >= 400) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public boolean playerObjectCollision(Player player) {
 		boolean hit = false;
 
 		Rectangle playerRect = new Rectangle(player.getPlayerImageView().getX(), player.getPlayerImageView().getY(),
 				Constants.playerWidth, Constants.playerHeight);
 
-		Rectangle enemyRect = new Rectangle(this.getObjectImageView().getX(), this.getObjectImageView().getY(),
+		Rectangle objectRect = new Rectangle(this.getObjectImageView().getX(), this.getObjectImageView().getY(),
 				Constants.objectWidth, Constants.objectHeight);
 
-		if (playerRect.getBoundsInParent().intersects(enemyRect.getBoundsInParent())) {
+		if (playerRect.getBoundsInParent().intersects(objectRect.getBoundsInParent())) {
 			hit = true;
-			player.setScore(1);
 		}
 
 		return hit;
