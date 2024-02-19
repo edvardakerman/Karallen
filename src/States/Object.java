@@ -1,11 +1,13 @@
 package States;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import Constants.Constants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -18,12 +20,15 @@ public abstract class Object {
 	protected ImageView objectImageView;
 	protected double X;
 	protected double Y;
+	protected AudioClip soundEffect;
 
-	public Object(double x, double y, String image) {
+	public Object(double x, double y, String image, String sound) {
 		X = x;
 		Y = y;
 
 		try {
+			File objectSound = new File(sound);
+			soundEffect = new AudioClip(objectSound.toURI().toString());
 			Image objectImage = new Image(new FileInputStream(image));
 			objectImageView = new ImageView(objectImage);
 			objectImageView.setX(X);
@@ -63,5 +68,8 @@ public abstract class Object {
 
 		return hit;
 	}
-
+	
+	public void makeSound() {
+		soundEffect.play();
+	}
 }

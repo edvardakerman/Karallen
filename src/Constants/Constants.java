@@ -40,6 +40,15 @@ public interface Constants {
 	// Colors
 	String pinkbackground = "-fx-background-color: #EFD9CE;";
 	String blackbackground = "-fx-background-color: #111111;";
+	
+	// Sounds
+	String slurp = "src/Public/Sounds/slurp.mp3";
+	String bite = "src/Public/Sounds/bite.mp3";
+	String gameOver = "src/Public/Sounds/gameOver.mp3";
+	String yeah = "src/Public/Sounds/yeah.mp3";
+	String bouncerSound = "src/Public/Sounds/bouncerSound.mp3";
+	String techno = "src/Public/Sounds/techno.mp3";
+	
 
 
 }

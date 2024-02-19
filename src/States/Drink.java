@@ -4,12 +4,8 @@ import Constants.Constants;
 
 public class Drink extends Object {
 	
-	/**
-	 * Drink is a subclass to the Object class and provides more behavioral functionality like movement.
-	 */
-	
-	public Drink(double x, double y, String image) {
-		super(x, y, image);
+	public Drink(double x, double y, String image, String sound) {
+		super(x, y, image, sound);
 	}
 	
 	public void move() {
