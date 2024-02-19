@@ -109,9 +109,7 @@ public class Game extends Pane {
 
 				// Bouncer
 				bouncer.move();
-				if (bouncer.playerObjectCollision(player)) {
-					player.setLives(0);
-				}
+				map.bouncerCollision(player, bouncer);
 
 			}
 		};

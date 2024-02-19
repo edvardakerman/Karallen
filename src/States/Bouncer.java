@@ -44,6 +44,13 @@ public class Bouncer extends Object{
 
 	}
 	
+	public void relocate() {
+		X = (Constants.screenWidth - Constants.playerWidth) / 2;
+		Y = Constants.screenHeight - 300;
+		objectImageView.setY(Y);
+		objectImageView.setX(X);
+	}
+	
 	public void increaseSpeed() {
 		speed += 0.25;
 	}

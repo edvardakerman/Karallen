@@ -5,7 +5,7 @@ import Constants.Constants;
 public class MapExtra extends Map {
 	public MapExtra() {
 		super();
-		this.map = "hungover";
+		this.map = "hangover";
 		this.backgroundColor = Constants.pinkbackground;
 		this.playerImg = Constants.specialPlayerImg;
 		this.drinkImg = Constants.specialDrinkImg;
@@ -13,7 +13,10 @@ public class MapExtra extends Map {
 		this.ScoreMultiplierImg = Constants.specialScoreMultiplierImg;
 	}
 	
-	public void specialEffect() {
-
+	public void bouncerCollision(Player player, Bouncer bouncer) {
+		if (bouncer.playerObjectCollision(player)) {
+			bouncer.relocate();
+			player.setLives(player.getLives() - 1);
+		}
 	}
 }

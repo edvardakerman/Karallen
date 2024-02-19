@@ -20,10 +20,15 @@ public class Map {
 		
 	}
 	
+	public void bouncerCollision(Player player, Bouncer bouncer) {
+		if (bouncer.playerObjectCollision(player)) {
+			player.setLives(0);
+		}
+	}
+	
 	public String getMap() {
 		return this.map;
 	}
-
 
 	public String getBackgroundColor() {
 		return this.backgroundColor;
@@ -43,8 +48,5 @@ public class Map {
 	
 	public String getScoreMultiplierImg() {
 		return this.ScoreMultiplierImg;
-	}
-	
-	public void specialEffect() {
 	}
 }
