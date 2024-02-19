@@ -13,8 +13,8 @@ public abstract class PowerUp extends Object{
 	private int scoreSinceActive = 0;
 	private Random random = new Random();
 
-	public PowerUp(double x, double y, String image) {
-		super(x, y, image);
+	public PowerUp(double x, double y, String image, String sound) {
+		super(x, y, image, sound);
 	}
 	
 	protected Boolean getStatus() {

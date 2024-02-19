@@ -3,10 +3,13 @@ package States;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import Constants.Constants;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,14 +31,24 @@ public class Game extends Pane {
 	private Text instrcutionsText;
 	private boolean isGameOver = false;
 	private AnimationTimer gameLoop;
+	private AudioClip technoSound;
+	private AudioClip gameOverSound;
 
-	public Game(GameMode gameMode) {
+	public Game(Map map) {
+		
+		File sound = new File(Constants.techno);
+		technoSound = new AudioClip(sound.toURI().toString());
+		sound = new File(Constants.gameOver);
+		gameOverSound = new AudioClip(sound.toURI().toString());
+		
+		technoSound.setCycleCount(10);
+		technoSound.play();
 
 		setPrefSize(Constants.screenWidth, Constants.screenHeight);
-		setStyle(gameMode.getBackgroundColor());
+		setStyle(map.getBackgroundColor());
 
-		player = new Player(gameMode.getPlayerImg());
-		bouncer = new Bouncer(gameMode.getBouncerImg());
+		player = new Player(map.getPlayerImg());
+		bouncer = new Bouncer(map.getBouncerImg(), Constants.bouncerSound);
 		getChildren().addAll(player.getPlayerImageView(), bouncer.getObjectImageView());
 
 		gameOverText = createText(Constants.screenWidth / 2 - 50, Constants.screenHeight / 2 - 30, "Game Over", 20);
@@ -46,10 +59,10 @@ public class Game extends Pane {
 		scoreText = createText(10, 50, "Score: " + player.getScore(), 18);
 		getChildren().addAll(livesText, scoreText);
 
-		ExtraLifePowerUp extraLifePowerUp = new ExtraLifePowerUp(-100, -100, Constants.extraLifeImg);
+		ExtraLifePowerUp extraLifePowerUp = new ExtraLifePowerUp(-100, -100, Constants.extraLifeImg, Constants.bite);
 		getChildren().add(extraLifePowerUp.getObjectImageView());
 
-		ExtraScorePowerUp extraScorePowerUp = new ExtraScorePowerUp(-100, -100, gameMode.getScoreMultiplierImg());
+		ExtraScorePowerUp extraScorePowerUp = new ExtraScorePowerUp(-100, -100, map.getScoreMultiplierImg(), Constants.yeah);
 		getChildren().add(extraScorePowerUp.getObjectImageView());
 
 		gameLoop = new AnimationTimer() {
@@ -75,7 +88,7 @@ public class Game extends Pane {
 				if (now - lastDrinkSpawnTime >= 3000000000L - player.getScore() * 10000000) {
 					double drinkX = random.nextDouble() * (Constants.screenWidth - Constants.objectWidth);
 					double drinkY = 0;
-					Drink drink = new Drink(drinkX, drinkY, gameMode.getDrinkImg());
+					Drink drink = new Drink(drinkX, drinkY, map.getDrinkImg(), Constants.slurp);
 					getChildren().add(drink.getObjectImageView());
 					drinks.add(drink);
 					lastDrinkSpawnTime = now;
@@ -85,7 +98,7 @@ public class Game extends Pane {
 			private void moveEntities() {
 
 				// Temporary drink
-				Drink tmpDrink = new Drink(-100, -100, Constants.beerImg);
+				Drink tmpDrink = new Drink(-100, -100, Constants.beerImg, Constants.slurp);
 
 				// Drinks
 				for (Drink drink : drinks) {
@@ -115,6 +128,7 @@ public class Game extends Pane {
 		isGameOver = true;
 		HighScore highScore = new HighScore();
 		highScore.saveScore(player.getScore());
+		technoSound.stop();
 	}
 
 	public void handleKeyPress(KeyCode keyCode) {
@@ -127,6 +141,7 @@ public class Game extends Pane {
 			tmpDrink = drink;
 			player.setScore(1);
 			bouncer.increaseBouncerSpeed(player);
+			drink.makeSound();
 		} else if (drink.slipsByPlayer()) {
 			getChildren().remove(drink.getObjectImageView());
 			tmpDrink = drink;
@@ -146,6 +161,7 @@ public class Game extends Pane {
 	private void checkGameStatus() {
 		if (player.getLives() == 0) {
 			stopGame();
+			gameOverSound.play();
 		}
 	}
 

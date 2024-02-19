@@ -1,4 +1,5 @@
 package States;
+
 import Constants.Constants;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -17,13 +18,14 @@ public class Menu extends VBox {
 
 	private Button startBtn;
 	private Button exitBtn;
-	private Button switchGameModeBtn;
+	private Button switchMapBtn;
 	private Text highScoreText;
 	private Text karallen;
 	private HighScore highScore = new HighScore();
-	private GameMode gameMode = new GameMode("Party");
+	private Map map = new Map();	
 
 	public Menu() {
+		
 		setStyle(Constants.blackbackground);
 		setSpacing(20);
 		setAlignment(Pos.CENTER);
@@ -37,9 +39,9 @@ public class Menu extends VBox {
 
 		startBtn = createButton("Start Game", 20);
 
-		switchGameModeBtn = createButton("Party", 15);
-		switchGameModeBtn.setOnAction(event -> {
-			switchGameModeBtnAction();
+		switchMapBtn = createButton("Party", 15);
+		switchMapBtn.setOnAction(event -> {
+			switchMapBtnAction();
 		});
 
 		exitBtn = createButton("Exit", 15);
@@ -47,25 +49,29 @@ public class Menu extends VBox {
 			System.exit(0);
 		});
 
-		getChildren().addAll(karallen, startBtn, switchGameModeBtn, exitBtn, highScoreText);
+		getChildren().addAll(karallen, startBtn, switchMapBtn, exitBtn, highScoreText);
 	}
 
 	public Button getStartBtn() {
 		return startBtn;
 	}
 
-	public GameMode getGameMode() {
-		return gameMode;
+	public Map getMap() {
+		return map;
 	}
 
 	public void updateHighScore() {
 		highScoreText.setText("HighScore: " + highScore.getHighScore());
 	}
 
-	private void switchGameModeBtnAction() {
-		gameMode.switchGameMode();
-		setStyle(gameMode.getBackgroundColor());
-		switchGameModeBtn.setText(gameMode.getCurrentGameMode());
+	private void switchMapBtnAction() {
+		if (map.getMap() == "party") {
+			map = new MapExtra();
+		} else {
+			map = new Map();
+		}
+		setStyle(map.getBackgroundColor());
+		switchMapBtn.setText(map.getMap());
 	}
 
 	private Button createButton(String text, int size) {

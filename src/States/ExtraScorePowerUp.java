@@ -6,13 +6,13 @@ package States;
  */
 
 public class ExtraScorePowerUp extends PowerUp {
-
-	public ExtraScorePowerUp(double x, double y, String image) {
-		super(x, y, image);
+	public ExtraScorePowerUp(double x, double y, String image, String sound) {
+		super(x, y, image, sound);
 	}
 
 	public void use(Player player) {
 		player.setScoreBonus(player.getScoreBonus() + 1);
+		makeSound();
 	}
 	
 	public void spawn(Player player) {

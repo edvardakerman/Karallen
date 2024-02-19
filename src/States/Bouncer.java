@@ -15,9 +15,10 @@ public class Bouncer extends Object{
 	private double speed = Constants.objectSpeed;
 	int lastScore = 0;
 	
-	public Bouncer(String image) {		
-		super((Constants.screenWidth - Constants.playerWidth) / 2, Constants.screenHeight - 300, image);
+	public Bouncer(String image, String sound) {		
+		super((Constants.screenWidth - Constants.playerWidth) / 2, Constants.screenHeight - 300, image, sound);
 		// TODO Auto-generated constructor stub
+		makeSound();
 	}
 	
 	public void move() {
@@ -51,6 +52,7 @@ public class Bouncer extends Object{
 		if ((player.getScore() - lastScore) / player.getScoreBonus() >= 15) {
 			increaseSpeed();
 			lastScore = player.getScore();
+			makeSound();
 		}
 	}
 

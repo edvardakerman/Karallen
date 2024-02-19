@@ -6,13 +6,13 @@ package States;
  */
 
 public class ExtraLifePowerUp extends PowerUp {
-
-	public ExtraLifePowerUp(double x, double y, String image) {
-		super(x, y, image);
+	public ExtraLifePowerUp(double x, double y, String image, String sound) {
+		super(x, y, image, sound);
 	}
 
 	protected void use(Player player) {
 		player.setLives(player.getLives() + 1);
+		makeSound();
 	}
 	
 	protected void spawn(Player player) {
@@ -20,4 +20,5 @@ public class ExtraLifePowerUp extends PowerUp {
 			activate();
 		}
 	}
+
 }

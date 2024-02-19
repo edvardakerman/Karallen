@@ -2,7 +2,7 @@ package Main;
 
 import Constants.Constants;
 import States.Game;
-import States.GameMode;
+import States.Map;
 import States.Menu;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -40,7 +40,7 @@ public class Main extends Application {
 		Menu menu = new Menu();
 
 		menu.getStartBtn().setOnAction(event -> {
-			createGameScene(menu.getGameMode());
+			createGameScene(menu.getMap());
 			primaryStage.setScene(gameScene);
 
 			game.startGame();
@@ -60,8 +60,8 @@ public class Main extends Application {
 		menuScene = new Scene(menu, Constants.screenWidth, Constants.screenHeight);
 	}
 
-	private void createGameScene(GameMode gameMode) {
-		game = new Game(gameMode);
+	private void createGameScene(Map map) {
+		game = new Game(map);
 		gameScene = new Scene(game, Constants.screenWidth, Constants.screenHeight);
 	}
 }
