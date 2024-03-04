@@ -80,6 +80,13 @@ public class Player {
 			playerImageView.setX(playerX);
 		}
 	}
+	
+	public void relocate() {
+		playerX = (Constants.screenWidth - Constants.playerWidth) / 2;
+		playerY = Constants.screenHeight - 50;
+		playerImageView.setX(playerX);
+		playerImageView.setY(playerY);
+	}
 
 	public int getScore() {
 		return score;

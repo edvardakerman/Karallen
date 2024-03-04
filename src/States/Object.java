@@ -52,6 +52,7 @@ public abstract class Object {
 	public ImageView getObjectImageView() {
 		return objectImageView;
 	}
+	
 
 	public boolean playerObjectCollision(Player player) {
 		boolean hit = false;

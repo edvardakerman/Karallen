@@ -6,6 +6,7 @@ public class Drink extends Object {
 	
 	public Drink(double x, double y, String image, String sound) {
 		super(x, y, image, sound);
+		this.soundEffect.setVolume(0.3);
 	}
 	
 	public void move() {

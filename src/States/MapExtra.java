@@ -16,6 +16,7 @@ public class MapExtra extends Map {
 	public void bouncerCollision(Player player, Bouncer bouncer) {
 		if (bouncer.playerObjectCollision(player)) {
 			bouncer.relocate();
+			player.relocate();
 			player.setLives(player.getLives() - 1);
 		}
 	}
