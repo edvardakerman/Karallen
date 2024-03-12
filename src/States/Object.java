@@ -17,10 +17,10 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class Object {
 
-	protected ImageView objectImageView;
-	protected double X;
-	protected double Y;
-	protected AudioClip soundEffect;
+	private ImageView objectImageView;
+	private double X;
+	private double Y;
+	private AudioClip soundEffect;
 
 	public Object(double x, double y, String image, String sound) {
 		X = x;
@@ -47,6 +47,18 @@ public abstract class Object {
 
 	public double getY() {
 		return Y;
+	}
+	
+	public AudioClip getSoundEffect() {
+		return soundEffect;
+	}
+	
+	public void setX(double x) {
+		X = x;
+	}
+	
+	public void setY(double y) {
+		Y = y;
 	}
 
 	public ImageView getObjectImageView() {

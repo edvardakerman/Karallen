@@ -10,12 +10,12 @@ public class ExtraScorePowerUp extends PowerUp {
 		super(x, y, image, sound);
 	}
 
-	public void use(Player player) {
+	protected void use(Player player) {
 		player.setScoreBonus(player.getScoreBonus() + 1);
 		makeSound();
 	}
 	
-	public void spawn(Player player) {
+	protected void spawn(Player player) {
 		if ((player.getScore() - getScoreSinceActive()) / player.getScoreBonus() >= 20 && !getStatus()) {
 			activate();
 		}

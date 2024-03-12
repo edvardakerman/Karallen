@@ -24,24 +24,23 @@ public abstract class PowerUp extends Object{
 	protected int getScoreSinceActive() {
 		return scoreSinceActive;
 	}
-	
-	protected void deactivate() {
-		active = false;
-		this.objectImageView.setY(-100);
-		this.objectImageView.setX(-100);
-	}
-	
+
 	protected void activate() {
 		active = true;
-		this.objectImageView.setY(random.nextDouble() * (Constants.screenWidth - 40));
-		this.objectImageView.setX(random.nextDouble((Constants.screenHeight - 40) - (Constants.screenHeight / 2))
+		getObjectImageView().setY(random.nextDouble() * (Constants.screenWidth - 40));
+		getObjectImageView().setX(random.nextDouble((Constants.screenHeight - 40) - (Constants.screenHeight / 2))
 				+ Constants.screenHeight / 2);
 	}
 	
+	private void deactivate() {
+		active = false;
+		getObjectImageView().setY(-100);
+		getObjectImageView().setX(-100);
+	}
+	
+	
 	private void checkCollision(Player player) {
 		if (this.playerObjectCollision(player)) {
-			this.objectImageView.setY(-100);
-			this.objectImageView.setX(-100);
 			use(player);
 			deactivate();
 			scoreSinceActive = player.getScore();
@@ -52,8 +51,6 @@ public abstract class PowerUp extends Object{
 		this.spawn(player);
 		this.checkCollision(player);
 	}
-	
-	
 	
 	protected abstract void use(Player player);
 	

@@ -24,18 +24,18 @@ public class Bouncer extends Object{
 	public void move() {
 		String direction[] = {"up", "right", "down", "left"};
 		
-		if (direction[currentDirection] == "up" && destination < Y) {
-			Y -= speed;
-			objectImageView.setY(Y);
-		} else if (direction[currentDirection] == "right" && destination > X) {
-			X += speed;
-			objectImageView.setX(X);
-		} else if (direction[currentDirection] == "down" && destination > Y) {
-			Y += speed;
-			objectImageView.setY(Y);
-		} else if (direction[currentDirection] == "left" && destination < X) {
-			X -= speed;
-			objectImageView.setX(X);
+		if (direction[currentDirection] == "up" && destination < getY()) {
+			setY(getY() - speed);
+			getObjectImageView().setY(getY());
+		} else if (direction[currentDirection] == "right" && destination > getX()) {
+			setX(getX() + speed);
+			getObjectImageView().setX(getX());
+		} else if (direction[currentDirection] == "down" && destination > getY()) {
+			setY(getY() + speed);
+			getObjectImageView().setY(getY());
+		} else if (direction[currentDirection] == "left" && destination < getX()) {
+			setX(getX() - speed);
+			getObjectImageView().setX(getX());
 		} else {
 			Random random = new Random();
 			currentDirection = random.nextInt(4);
@@ -45,10 +45,10 @@ public class Bouncer extends Object{
 	}
 	
 	public void relocate() {
-		X = (Constants.screenWidth - Constants.playerWidth) / 2;
-		Y = Constants.screenHeight - 300;
-		objectImageView.setY(Y);
-		objectImageView.setX(X);
+		setX((Constants.screenWidth - Constants.playerWidth) / 2);
+		setY(Constants.screenHeight - 300);
+		getObjectImageView().setY(getY());
+		getObjectImageView().setX(getX());
 	}
 	
 	public void increaseSpeed() {
