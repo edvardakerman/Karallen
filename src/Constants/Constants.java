@@ -32,7 +32,7 @@ public interface Constants {
 
 	// Screen
 	final double screenWidth = 400;
-	final double screenHeight = 400;
+	final double screenHeight = 300;
 
 	// Other
 	String font = "Impact";

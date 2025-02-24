@@ -5,7 +5,7 @@ import Constants.Constants;
 public class MapExtra extends Map {
 	public MapExtra() {
 		super();
-		this.map = "hangover";
+		this.map = "Hangover (easy)";
 		this.backgroundColor = Constants.pinkbackground;
 		this.playerImg = Constants.specialPlayerImg;
 		this.drinkImg = Constants.specialDrinkImg;

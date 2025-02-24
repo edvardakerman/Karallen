@@ -39,7 +39,7 @@ public class Menu extends VBox {
 
 		startBtn = createButton("Start Game", 20);
 
-		switchMapBtn = createButton("Party", 15);
+		switchMapBtn = createButton("Party (Hard)", 15);
 		switchMapBtn.setOnAction(event -> {
 			switchMapBtnAction();
 		});
@@ -65,7 +65,7 @@ public class Menu extends VBox {
 	}
 
 	private void switchMapBtnAction() {
-		if (map.getMap() == "party") {
+		if (map.getMap() == "Party (hard)") {
 			map = new MapExtra();
 		} else {
 			map = new Map();

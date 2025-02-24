@@ -8,7 +8,7 @@ import Constants.Constants;
  * Bouncer is a subclass to the Object class and provides more behavioral functionality like movement.
  */
 
-public class Bouncer extends Object{
+public class Bouncer extends GameEnity{
 	private Random random = new Random();
 	private int currentDirection = random.nextInt(4);
 	private double destination = random.nextDouble() * (Constants.screenWidth - 40);
@@ -16,7 +16,7 @@ public class Bouncer extends Object{
 	int lastScore = 0;
 	
 	public Bouncer(String image, String sound) {		
-		super((Constants.screenWidth - Constants.playerWidth) / 2, Constants.screenHeight - 300, image, sound);
+		super((Constants.screenWidth - Constants.playerWidth) / 2, Constants.objectHeight, image, sound);
 		// TODO Auto-generated constructor stub
 		makeSound();
 	}
@@ -39,14 +39,19 @@ public class Bouncer extends Object{
 		} else {
 			Random random = new Random();
 			currentDirection = random.nextInt(4);
-			destination = random.nextDouble() * (Constants.screenWidth - 40);
+			if (direction[currentDirection] == "up" || direction[currentDirection] == "down") {
+				destination = random.nextDouble() * (Constants.screenHeight - 40);
+			} else {
+				destination = random.nextDouble() * (Constants.screenWidth - 40);
+			}
+			
 		}
 
 	}
 	
 	public void relocate() {
 		setX((Constants.screenWidth - Constants.playerWidth) / 2);
-		setY(Constants.screenHeight - 300);
+		setY(Constants.objectHeight);
 		getObjectImageView().setY(getY());
 		getObjectImageView().setX(getX());
 	}

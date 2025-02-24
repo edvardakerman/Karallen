@@ -9,7 +9,7 @@ import Constants.Constants;
  */
 
 public class Map {
-	protected String map = "party";
+	protected String map = "Party (hard)";
 	protected String backgroundColor = Constants.blackbackground;
 	protected String playerImg = Constants.playerImg;
 	protected String drinkImg = Constants.beerImg;

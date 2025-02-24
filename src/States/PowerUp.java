@@ -8,7 +8,7 @@ import Constants.Constants;
  * PowerUp is a abstract subclass to the Object class and provides the behavioral functionality for PowerUps.
  */
 
-public abstract class PowerUp extends Object{
+public abstract class PowerUp extends GameEnity{
 	private Boolean active = false;
 	private int scoreSinceActive = 0;
 	private Random random = new Random();
@@ -28,8 +28,9 @@ public abstract class PowerUp extends Object{
 	protected void activate() {
 		active = true;
 		getObjectImageView().setY(random.nextDouble() * (Constants.screenWidth - 40));
-		getObjectImageView().setX(random.nextDouble((Constants.screenHeight - 40) - (Constants.screenHeight / 2))
-				+ Constants.screenHeight / 2);
+		getObjectImageView().setX(random.nextDouble((Constants.screenHeight - 40)));
+				
+//				- (Constants.screenHeight / 2))+ Constants.screenHeight / 2);
 	}
 	
 	private void deactivate() {

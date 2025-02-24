@@ -11,18 +11,18 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Object is a abstract superclass and handles the object behavior including its ImageView, collisions and variables. This
+ * GameEntity is a abstract superclass and handles the object behavior including its ImageView, collisions and variables. This
  * is a superclass to the Drink, Bouncer and PowerUp class.
  */
 
-public abstract class Object {
+public abstract class GameEnity {
 
 	private ImageView objectImageView;
 	private double X;
 	private double Y;
 	private AudioClip soundEffect;
 
-	public Object(double x, double y, String image, String sound) {
+	public GameEnity(double x, double y, String image, String sound) {
 		X = x;
 		Y = y;
 

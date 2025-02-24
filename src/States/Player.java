@@ -61,7 +61,7 @@ public class Player {
 	}
 
 	private void moveDown() {
-		if (playerY < 360) {
+		if (playerY < Constants.screenHeight - Constants.playerHeight) {
 			playerY += Constants.playerSpeed;
 			playerImageView.setY(playerY);
 		}
@@ -75,7 +75,7 @@ public class Player {
 	}
 
 	private void moveRight() {
-		if (playerX < 360) {
+		if (playerX < Constants.screenWidth - Constants.playerWidth) {
 			playerX += Constants.playerSpeed;
 			playerImageView.setX(playerX);
 		}

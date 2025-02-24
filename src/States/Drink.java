@@ -2,7 +2,7 @@ package States;
 
 import Constants.Constants;
 
-public class Drink extends Object {
+public class Drink extends GameEnity {
 	
 	public Drink(double x, double y, String image, String sound) {
 		super(x, y, image, sound);
@@ -15,7 +15,7 @@ public class Drink extends Object {
 	}
 	
 	public boolean slipsByPlayer() {
-		if (getY() >= 400) {
+		if (getY() >= Constants.screenHeight) {
 			return true;
 		} else {
 			return false;
